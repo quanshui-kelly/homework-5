@@ -123,7 +123,7 @@ class Sudoku(object):
 
         if consider_member == old_one:
             return False
-        
+
         self.board[cell1] = consider_member
         return True
 
@@ -142,7 +142,7 @@ class Sudoku(object):
         return True
 
     def infer_improved(self):
-         while True:
+        while True:
 
             if not self.infer_ac3():
                 return False
@@ -195,13 +195,13 @@ class Sudoku(object):
                 solution = search(guessed_board)
                 if solution is not None:
                     return solution
-                    
+
             return None
 
         solution = search(self.board)
         if solution is None:
             return False
-        
+
         self.board = solution
         return True
 
