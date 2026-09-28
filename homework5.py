@@ -21,8 +21,10 @@ student_name = "Xinyuan Quan"
 # Sudoku Solver
 ############################################################
 
+
 def sudoku_cells():
     return [(row, col) for row in range(9) for col in range(9)]
+
 
 def sudoku_arcs():
     ans = []
@@ -48,6 +50,7 @@ def sudoku_arcs():
                 ans.append((cell1, cell2))
 
     return ans
+
 
 def read_board(path):
     board = {}
@@ -76,6 +79,7 @@ def read_board(path):
                 raise ValueError("Board cells must be digits, '*' or '0'.")
     return board
 
+
 def sudoku_units():
     rows = [[(row, col) for col in range(9)] for row in range(9)]
     columns = [[(row, col) for row in range(9)] for col in range(9)]
@@ -91,12 +95,16 @@ def sudoku_units():
 
     return rows + columns + blocks
 
+
 class Sudoku(object):
 
     CELLS = sudoku_cells()
     ARCS = sudoku_arcs()
     UNITS = sudoku_units()
     PEERS = {cell: set() for cell in CELLS}
+
+    for cell1, cell2 in ARCS:
+        PEERS[cell1].add(cell2)
 
     def __init__(self, board):
         self.board = {cell: set(values) for cell, values in board.items()}
